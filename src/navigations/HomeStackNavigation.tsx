@@ -17,7 +17,7 @@ export default function HomeStackNavigation(): JSX.Element {
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >
-      <Stack.Screen name="MainHome" component={Home} options={{ title: 'Home' }} />
+      <Stack.Screen name="MainHome" component={Home} options={{ title: 'Movie App' }} />
       <Stack.Screen name="MovieDetail" component={MovieDetail} options={{ title: 'Movie Detail' }} />
     </Stack.Navigator>
   );
