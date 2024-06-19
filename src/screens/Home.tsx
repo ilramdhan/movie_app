@@ -1,24 +1,55 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, SafeAreaView } from 'react-native';
+import type { MovieListProps } from '../types/app';
+import MovieList from '../components/movies/MovieList';
 
-export default function Home({ navigation }: { navigation: any }): JSX.Element {
+const movieLists: MovieListProps[] = [
+  {
+    title: 'Now Playing in Theater',
+    path: 'movie/now_playing?language=en-US&page=1',
+    coverType: 'backdrop',
+  },
+  {
+    title: 'Upcoming Movies',
+    path: 'movie/upcoming?language=en-US&page=1',
+    coverType: 'poster',
+  },
+  {
+    title: 'Top Rated Movies',
+    path: 'movie/top_rated?language=en-US&page=1',
+    coverType: 'poster',
+  },
+  {
+    title: 'Popular Movies',
+    path: 'movie/popular?language=en-US&page=1',
+    coverType: 'poster',
+  },
+];
+
+const Home = (): JSX.Element => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-      <Button title="Move to Movie Detail" onPress={() => navigation.navigate('MovieDetail')} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {movieLists.map((movieList) => (
+          <MovieList
+            title={movieList.title}
+            path={movieList.path}
+            coverType={movieList.coverType}
+            key={movieList.title}
+          />
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
+    flexGrow: 1,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
   },
 });
+
+export default Home;
